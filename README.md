@@ -8,6 +8,7 @@ Using an event hub or message broker does not mean your application is event sou
 Now that we know where I'm coming from with Event Hub and Message Brokers, lets talk about building applications with both of these ideas. In any application there are usually things better suited for an event hub and some things that require a message broker. The goal of this project is to make working with events/messages the same and allowing you to choose which messages require a hub or a broker. And also all the other decisions you might need to make about where to store the events, do they need to be encrypted, what transport to use, should all be abstracted away from how you write your application.
 
 Message Hub == Event Hub
+
 Message Broker != Message Hub
 
 ## Design Goals
@@ -19,30 +20,39 @@ Message Broker != Message Hub
 ## How to use this project
 Eventually it will be a NuGet package and you will add NuGet packages for different implementations. I think the best way to setup different implementations for different messages is to create event groups with names and you can define how those message are handled by default. We're still in early stages but I'd like to have it look something like this in your Startup.cs
 
+```
 services.UseEventDrive().UseEventStore("MyAppEventGroup", connectionString).UseInMemoryStream("MyAppInMemory").UseSignalR("ExternalAppGroup", signalRHub);
-
+```
 
 
 ## The state of this project
 This is very much in the research stage. Nothing is finalized yet so don't depend on the interfaces. There has been no attempts to optimize anything yet. I'd like to get a few working samples and a few different event hub and message broker implementations before we start to finalize the interfaces. I'd like to shoot for these initial server/services:
-EventStore
-RabbitMQ
-SignalR - for direct to application/server message passing
-InMemoryStream
-InMemoryQueue
-OnDiskStream
-OnDiskQueue
 
-Future implementations:
-Azure EventHub
-Apache Kafka
-WebAPI - direct to app messaging
-UDP - Direct to IP and Broadcast
-Postgresql
-ZeroMQ
-Any the community wants to build
+* EventStore
+* RabbitMQ
+* SignalR - for direct to application/server message passing
+* InMemoryStream
+* InMemoryQueue
+* OnDiskStream
+* OnDiskQueue
+
+#### Future implementations:
+
+* Azure EventHub
+* Apache Kafka
+* WebAPI - direct to app messaging
+* UDP - Direct to IP and Broadcast
+* Postgresql
+* ZeroMQ
+* Any the community wants to build
 
 I'm open to different names for this project.
 
 ## Testing Setup
+In order to use EventStore in the samples you'll need to add the connections tring to your secrets like this:
+
+```
 dotnet user-secrets set "EventDrive:EventStoreConnectionString" "tcp://<Your connection string>"
+```
+
+Run the ConsoleSample and the CustomerSample, they pass messages between each other.
