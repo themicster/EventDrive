@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EventDriveCore\EventDriveCore.csproj" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

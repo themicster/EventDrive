@@ -11,6 +11,8 @@ Message Hub == Event Hub
 
 Message Broker != Message Hub
 
+[Message Broker or Bus – what’s the difference?](https://neiljbrown.com/2017/05/13/message-broker-or-bus-whats-the-difference/ "Message Broker vs Message Bus")
+
 ## Design Goals
 1. Simple -- because complexity is the root of all evil
 2. Security First -- Secure by default
@@ -26,7 +28,7 @@ services.UseEventDrive().UseEventStore("MyAppEventGroup", connectionString).UseI
 
 
 ## The state of this project
-This is very much in the research stage. Nothing is finalized yet so don't depend on the interfaces. There has been no attempts to optimize anything yet. I'd like to get a few working samples and a few different event hub and message broker implementations before we start to finalize the interfaces. I'd like to shoot for these initial server/services:
+Pre-Alpha, nothing is ready to use. It's just something to do some testing of ideas at this point. I'd like to have support for the following server/services before releasing an official alpha.
 
 * EventStore
 * RabbitMQ
